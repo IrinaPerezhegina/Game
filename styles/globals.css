@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Boldonse&display=swap");
+* {
+  box-sizing: border-box;
+}
+button,
+h1,
+input,
+span {
+  font-family: "Boldonse", system-ui;
+}
+body {
+  background: linear-gradient(90deg, #29323c 0%, #485563 100%);
+  font-family: "Boldonse", system-ui;
+  height: 100vh;
+  overflow: auto;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.start {
+  font-size: 1.5rem;
+}
+
+h1 {
+  line-height: 1.4;
+  font-size: 4rem;
+}
+
+.screen {
+  display: flex;
+  gap: 50px;
+  min-width: 100%;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  transition: margin 0.5s ease-out;
+  background: linear-gradient(90deg, #29323c 0%, #485563 100%);
+}
+
+@media (max-width: 1320px) {
+  .screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+.btn {
+  background-color: transparent;
+  border: 4px solid #c0c0c0;
+  color: #fff;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0.5rem 1rem;
+  font-size: 4rem;
+}
+@media (max-width: 600px) {
+  .btn {
+    padding: 0.2rem 0.8rem;
+    font-size: 3rem;
+  }
+}
+@media (max-width: 420px) {
+  .btn {
+    padding: 0.3rem 0.4rem;
+    font-size: 2.3rem;
+  }
+}
+.btn:hover {
+  border: 2px solid #16d9e3;
+  color: #16d9e3;
+}
+
+.hide {
+  opacity: 0;
+}
+
+.primary {
+  color: #16d9e3;
+}
+
+.board {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 500px;
+  height: 500px;
+  background: linear-gradient(118.38deg, #29323c -4.6%, #485563 200.44%);
+  box-shadow: -8px -8px 20px #2a333d, 10px 7px 20px #475462;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  cursor: pointer;
+}
