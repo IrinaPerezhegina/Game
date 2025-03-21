@@ -5,7 +5,7 @@ import { Container } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import styles from "../styles/Settings.module.scss";
-import "../styles/globals.css";
+
 const Setting = () => {
   const router = useRouter();
   const [gameSelected, setGameSelected] = useState<string>("");
@@ -23,7 +23,6 @@ const Setting = () => {
           }}
         >
           <ArrowBackIosNewIcon />
-       
         </button>
         <h1 className={styles.title}>Выберите уровень сложности игры:</h1>
         <div className={styles.btnWrapper}>

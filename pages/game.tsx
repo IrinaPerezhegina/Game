@@ -30,15 +30,13 @@ const Game: React.FC = () => {
     isRunning,
   } = useGame(NUM_ROWS, NUM_COLS, NUM_MINES);
   console.log(setVictory);
-  
+
   const router = useRouter();
   const [open, setOpen] = useState(false);
 
   console.log(flags, NUM_MINES, victory);
   useEffect(() => {
     if (victory) {
-
-
       setOpen(true);
     }
   }, [victory]);
@@ -125,7 +123,6 @@ const Game: React.FC = () => {
           }}
         >
           <ArrowBackIosNewIcon />
-     
         </button>
         <HeaderGame
           isRunning={isRunning || gameOver}
@@ -133,9 +130,11 @@ const Game: React.FC = () => {
           timer={timer}
           key={"HeaderGame"}
         />
-        {isRunning&&<span>
-          Разность между количеством мин и флажков - {NUM_MINES - flags}
-        </span>}
+        {isRunning && (
+          <span>
+            Разность между количеством мин и флажков - {NUM_MINES - flags}
+          </span>
+        )}
 
         <Board
           board={board}

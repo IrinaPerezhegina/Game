@@ -1,6 +1,6 @@
 import { Container } from "@mui/material";
 import { useRouter } from "next/navigation";
-import "../styles/globals.css";
+// import "../styles/globals.css";
 
 const Home = () => {
   const router = useRouter();

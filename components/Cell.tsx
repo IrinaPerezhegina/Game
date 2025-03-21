@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "../styles/Cell.module.scss";
-import "../styles/globals.css";
 import { Cell as CellType } from "../types/index"; // Импортируем тип ячейки
 
 interface CellProps {

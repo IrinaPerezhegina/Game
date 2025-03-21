@@ -7,8 +7,6 @@ import styles from "../styles/Settings.module.scss";
 const Settings: React.FC = () => {
   return (
     <Container className={styles.screen}>
-
-      
       <Setting />
     </Container>
   );

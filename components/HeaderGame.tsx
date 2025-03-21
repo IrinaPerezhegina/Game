@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import "../styles/globals.css";
+
 import styles from "../styles/Header.module.scss";
 import Timer from "./Timer";
 

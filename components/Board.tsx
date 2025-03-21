@@ -1,7 +1,7 @@
 import { Cell as CellType } from "@/types";
 import React from "react";
 import styles from "../styles/Board.module.scss";
-import "../styles/globals.css";
+
 import Cell from "./Cell";
 interface BoardProps {
   board: CellType[][];
