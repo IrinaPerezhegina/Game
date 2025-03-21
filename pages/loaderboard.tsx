@@ -1,20 +1,17 @@
-import useLeaderboardStore from "../store/slices/leaderboardStore";
+// import useLeaderboardStore from "../store/slices/leaderboardStore";
 
 const Leaderboard = () => {
-  const { scores } = useLeaderboardStore();
+  // const { scores } = useLeaderboardStore();
 
   return (
     <div>
       <h1>Таблица лидеров</h1>
       <ul>
-
-
-        
-        {scores.map((score, index) => (
+        {/* {scores.map((score, index) => (
           <li key={index}>
             {score.name}: {score.time} секунд
-          </li>
-        ))}
+          </li> */}
+        {/* ))} */}
       </ul>
     </div>
   );
