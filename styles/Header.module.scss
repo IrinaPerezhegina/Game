@@ -1,31 +1,69 @@
-.header{
-    display: flex;
-   justify-content: space-between;
-    gap: 20px;
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  @media (max-width: 500px) {
+    gap: 5px;
+  }
+}
+.setting {
+  display: flex;
+  gap: 20px;
+}
+.counter {
+  font-family: "Boldonse", system-ui;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #656b77;
+  border-radius: 10px;
+  padding: 20px;
+  color: #d8d1d1;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: auto;
+  margin: 20px auto;
+  font-size: 1.7rem;
+  width: 100%;
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    padding: 10px;
+  }
+}
+.counter:hover {
+  background-color: rgba(165, 151, 151, 0.2);
+  transform: translateY(-2px);
 }
 .btn {
   font-family: "Boldonse", system-ui;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 3px solid #656b77;
-    border-radius: 10px;
-    padding: 20px;
-    color: #d8d1d1;
-    background-color: rgba(0, 0, 0, 0.2);;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 200px;
-    margin: 20px auto;
-    font-size: 1.7rem;
-    cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #656b77;
+  border-radius: 10px;
+  padding: 20px;
+  color: #d8d1d1;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 200px;
+  margin: 20px auto;
+  font-size: 1.7rem;
+  cursor: pointer;
+  @media (max-width: 768px) {
+    width: auto;
+    font-size: 1rem;
+    padding: 10px;
   }
-  
-  .btn:hover {
-    background-color:rgba(165, 151, 151, 0.2); 
-    transform: translateY(-2px); 
-  }
-  
-  .btn:active {
-    transform: translateY(0);
-  }
+}
+
+.btn:hover {
+  background-color: rgba(59, 154, 43, 0.2);
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}

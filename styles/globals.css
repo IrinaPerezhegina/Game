@@ -5,16 +5,18 @@
 button,
 h1,
 input,
-span {
+span,
+div {
   font-family: "Boldonse", system-ui;
 }
 body {
   background: linear-gradient(90deg, #29323c 0%, #485563 100%);
   font-family: "Boldonse", system-ui;
-  height: 100vh;
+  color: white;
   overflow: auto;
   margin: 0 auto;
   text-align: center;
+  height: 100vh;
 }
 
 .start {
@@ -77,23 +79,4 @@ h1 {
 
 .primary {
   color: #16d9e3;
-}
-
-.board {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  width: 500px;
-  height: 500px;
-  background: linear-gradient(118.38deg, #29323c -4.6%, #485563 200.44%);
-  box-shadow: -8px -8px 20px #2a333d, 10px 7px 20px #475462;
-  border-radius: 30px;
-  overflow: hidden;
-}
-
-.circle {
-  position: absolute;
-  border-radius: 50%;
-  cursor: pointer;
 }

@@ -1,50 +1,70 @@
 "use client";
-import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { useAppDispatch } from "@/hooks/hooks";
+import { setSettings } from "@/store/slices/leaderboardStore";
 import { Container } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import styles from "../styles/Settings.module.scss";
+import { useEffect, useState } from "react";
+import styles from "../../styles/Settings.module.scss";
+import { BackButton } from "../ui";
 
-const Setting = () => {
+const Settings = {
+  easy: {
+    cols: 8,
+    rows: 8,
+    time: 600,
+  },
+  medium: {
+    cols: 16,
+    rows: 16,
+    time: 2400,
+  },
+  hard: {
+    cols: 32,
+    rows: 16,
+    time: 6000,
+  },
+};
+
+export const Setting = () => {
   const router = useRouter();
-  const [gameSelected, setGameSelected] = useState<string>("");
-  const dispatch = useAppDispatch;
-  const count = useAppSelector((state) => state.game.name);
-  console.log(dispatch, count);
+  const [gameSelected, setGameSelected] = useState<"easy" | "medium" | "hard">(
+    "easy"
+  );
+  const dispatch = useAppDispatch();
+  console.log(Settings[gameSelected]);
+
+  useEffect(() => {
+    dispatch(setSettings(Settings[gameSelected]));
+  }, [gameSelected, dispatch]);
   // const count = useAppSelector((state) => state.counter.name);
   return (
     <>
       <Container className={styles.screen}>
-        <button
-          className={styles.fixedBtn}
-          onClick={() => {
-            router.push("/");
-          }}
-        >
-          <ArrowBackIosNewIcon />
-        </button>
-        <h1 className={styles.title}>Выберите уровень сложности игры:</h1>
+        <BackButton href="/" />
+
+        <h1 className={styles.title}>
+          Choose the difficulty level of the game:
+        </h1>
         <div className={styles.btnWrapper}>
           <button
             onClick={() => setGameSelected("easy")}
             className={gameSelected === "easy" ? styles.selected : styles.btn}
           >
-            Простой (8x8, 10 мин)
+            Easy (8x8, 10 min)
           </button>
 
           <button
             onClick={() => setGameSelected("medium")}
             className={gameSelected === "medium" ? styles.selected : styles.btn}
           >
-            Средний 16x16, 40 мин
+            Medium 16x16, 40 min
           </button>
 
           <button
             onClick={() => setGameSelected("hard")}
             className={gameSelected === "hard" ? styles.selected : styles.btn}
           >
-            Сложный 32x16, 100 мин
+            Hard 32x16, 100 min
           </button>
         </div>
         {gameSelected && (
@@ -54,12 +74,10 @@ const Setting = () => {
               router.push("/game");
             }}
           >
-            Начать игру
+            START GAME
           </button>
         )}
       </Container>
     </>
   );
 };
-
-export default Setting;

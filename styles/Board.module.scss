@@ -1,0 +1,51 @@
+.board {
+}
+
+.easy {
+  grid-template-columns: repeat(8, 60px);
+  @media (max-width: 700px) {
+    grid-template-columns: repeat(8, 40px);
+  }
+  @media (max-width: 500px) {
+    grid-template-columns: repeat(8, 35px);
+  }
+}
+.medium {
+  grid-template-columns: repeat(16, 30px);
+  @media (max-width: 1150px) {
+    grid-template-columns: repeat(16, 20px);
+  }
+  //   @media (max-width: 1000px) {
+  //     grid-template-columns: repeat(16, 20px);
+  //   }
+  //   @media (max-width: 700px) {
+  //     grid-template-columns: repeat(16, 15px);
+  //   }
+  @media (max-width: 500px) {
+    grid-template-columns: repeat(16, 23px);
+  }
+  @media (max-width: 380px) {
+    grid-template-columns: repeat(16, 18px);
+  }
+}
+.hard {
+  grid-template-columns: repeat(32, 32px);
+  @media (max-width: 1150px) {
+    grid-template-columns: repeat(32, 28px);
+  }
+  @media (max-width: 1000px) {
+    grid-template-columns: repeat(32, 20px);
+  }
+  @media (max-width: 700px) {
+    grid-template-columns: repeat(32, 14px);
+  }
+  @media (max-width: 500px) {
+    grid-template-columns: repeat(32, 11px);
+  }
+  @media (max-width: 380px) {
+    grid-template-columns: repeat(32, 10px);
+  }
+  @media (max-width: 330px) {
+    grid-template-columns: repeat(32, 9px);
+  }
+}

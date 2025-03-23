@@ -1,11 +1,14 @@
 import React from "react";
-import styles from "../styles/Cell.module.scss";
-import { Cell as CellType } from "../types/index"; // Импортируем тип ячейки
+import styles from "../../styles/Cell.module.scss";
+import { Cell as CellType } from "../../types/index"; // Импортируем тип ячейки
 
 interface CellProps {
   cell: CellType;
+  size: number;
   onClick: () => void;
   onRightClick: (e: React.MouseEvent) => void;
+  onMiddleMouseDown: (e: React.MouseEvent) => void;
+  onMiddleMouseUp: (e: React.MouseEvent) => void;
 }
 type ColorCellType = {
   [key: number]: string;
@@ -21,8 +24,22 @@ const ColorCell: ColorCellType = {
   7: "#00020f",
   8: "#ffffff",
 };
-
-const Cell: React.FC<CellProps> = ({ cell, onClick, onRightClick }) => {
+type SizeCellType = {
+  [key: number]: string;
+};
+const SizeCell: SizeCellType = {
+  8: "easy",
+  16: "medium",
+  32: "hard",
+};
+export const Cell: React.FC<CellProps> = ({
+  size,
+  cell,
+  onClick,
+  onRightClick,
+  onMiddleMouseDown,
+  onMiddleMouseUp,
+}) => {
   const getCellContent = () => {
     if (cell.isRevealed) {
       if (cell.hasMine) {
@@ -34,6 +51,8 @@ const Cell: React.FC<CellProps> = ({ cell, onClick, onRightClick }) => {
       }
     } else if (cell.isFlagged) {
       return "🚩"; // Отображаем флаг
+    } else if (cell.isQuestioned) {
+      return "❓";
     } else {
       return ""; // Закрытая ячейка
     }
@@ -41,19 +60,19 @@ const Cell: React.FC<CellProps> = ({ cell, onClick, onRightClick }) => {
 
   return (
     <div
-      className={`${styles.cell} cell ${cell.isRevealed ? "revealed" : ""} ${
-        cell.isFlagged ? "flagged" : ""
-      } `}
+      className={`${styles[SizeCell[size]]} ${styles.cell} cell ${
+        cell.isRevealed ? "revealed" : ""
+      } ${cell.isFlagged ? "flagged" : ""} `}
       style={{
         background: cell.isRevealed ? "#9ba0a9" : "#2A333D",
         color: ColorCell[cell.neighboringMines],
       }}
       onClick={onClick}
       onContextMenu={onRightClick} // Обрабатываем правый клик
+      onMouseDown={onMiddleMouseDown}
+      onMouseUp={onMiddleMouseUp}
     >
       {getCellContent()}
     </div>
   );
 };
-
-export default Cell;

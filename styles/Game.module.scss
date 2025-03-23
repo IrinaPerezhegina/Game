@@ -1,43 +1,9 @@
 .screen {
-  flex: 1;
+  height: 100vh;
+  padding: 20px;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  height: 100vh;
-  min-width: 100%;
   transition: margin 0.5s ease-out;
-  background: linear-gradient(90deg, #29323c 0%, #485563 100%);
-}
-
-.fixedBtn {
-  align-items: center;
-  top: 20px;
-  left: 20px;
-  position: fixed;
-  background-color: transparent;
-  border: 2px solid #c0c0c0;
-  color: #fff;
-  cursor: pointer;
-
-  padding: 1.5rem 1.4rem;
-  font-size: 1.5rem;
-  gap: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  vertical-align: middle;
-  @media (max-width: 970px) {
-    text-align: center;
-    padding: 1rem 1rem;
-    font-size: 1rem;
-  }
-  @media (max-width: 860px) {
-    padding: 0.8rem 0.8rem;
-    font-size: 0.9rem;
-  }
-  @media (max-width: 320px) {
-    font-size: 0.7rem;
-  }
 }

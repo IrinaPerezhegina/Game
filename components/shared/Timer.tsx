@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
-import styles from "../styles/Timer.module.scss";
+import styles from "../../styles/Timer.module.scss";
 
 interface TimerProps {
   time: number; // Время в секундах
 }
 
-const Timer: React.FC<TimerProps> = ({ time }) => {
+export const Timer: React.FC<TimerProps> = ({ time }) => {
   // Преобразуем время в минуты и секунды
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;

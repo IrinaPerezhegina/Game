@@ -1,10 +1,10 @@
 "use client";
+import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
+import { setPlayerToLocalStorage } from "@/store/slices/leaderboardStore";
 import { Box, Modal } from "@mui/material";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-
-import { useAppSelector } from "@/hooks/hooks";
-import styles from "../styles/Modal.module.scss";
+import styles from "../../styles/Modal.module.scss";
 import Timer from "./Timer";
 
 interface ModalProps {
@@ -39,8 +39,7 @@ const styleWinner = {
   px: 4,
   pb: 3,
 };
-const MyModal: React.FC<ModalProps> = ({
-  victory,
+export const MyModal: React.FC<ModalProps> = ({
   gameOver,
   open,
   handleClose,
@@ -49,51 +48,60 @@ const MyModal: React.FC<ModalProps> = ({
   const [value, setValue] = useState("");
   const [error, setError] = useState("");
   const timeGame = useAppSelector((state) => state.game.time);
+  const dispatch = useAppDispatch();
+
   const onClickClose = () => {
-    if (gameOver) {
-      handleClose(false);
-    }
-    if (victory) {
+    handleClose(false);
+  };
+
+  const onClickCloseVictory = () => {
+    if (value) {
+      dispatch(setPlayerToLocalStorage({ name: value, time: timeGame }));
+
       handleClose(false);
       router.push("/settings");
     }
   };
+
   useEffect(() => {
     if (!value) {
-      setError("Заполните данные");
+      setError("Fill in the details");
     }
     if (value) {
       setError("");
     }
   }, [value]);
   const content = gameOver ? (
-    <Box sx={styleGameower}>
+    <Box sx={styleGameower} className={styles.gameower}>
       <h2 className={styles.gameower}>GAME OVER!</h2>
     </Box>
   ) : (
-    <Box sx={styleWinner}>
+    <Box sx={styleWinner} className={styles.winner}>
       <h2 className={styles.winner}>WINNER!</h2>
       <div className={styles.input}>
         <h4>Ваш результат, мин.</h4>
         <Timer time={timeGame} />
-        <div className="">
-          <label>Ваш имя</label>
+        <div className={styles.label}>
+          <label>Your Nickname: </label>
           <input
-            name=""
+            name="name"
+            placeholder="name"
             value={value}
             onChange={(e) => setValue(e.target.value)}
           />
-          {error && <div className="">{error}</div>}
+          {error && <div className={styles.error}>{error}</div>}
         </div>
       </div>
-      {value && <button onClick={onClickClose}>Close</button>}
+      {value && (
+        <button onClick={onClickCloseVictory} className={styles.btn}>
+          Close
+        </button>
+      )}
     </Box>
   );
   return (
-    <Modal open={open} onClose={onClickClose}>
+    <Modal open={open} onClose={gameOver ? onClickClose : onClickCloseVictory}>
       {content}
     </Modal>
   );
 };
-
-export default MyModal;

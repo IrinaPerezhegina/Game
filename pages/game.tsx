@@ -1,146 +1,74 @@
 "use client";
-import Board from "@/components/Board";
-import HeaderGame from "@/components/HeaderGame";
-import MyModal from "@/components/Modal";
+
+import { Board, HeaderGame, MyModal } from "@/components/shared";
+import { BackButton } from "@/components/ui";
+import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
 import useGame from "@/hooks/useGame";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { setSettings } from "@/store/slices/leaderboardStore";
 import { Container } from "@mui/material";
-import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import styles from "../styles/Game.module.scss";
-import { Cell as CellType } from "../types/index";
-const NUM_ROWS = 10;
-const NUM_COLS = 10;
-const NUM_MINES = 10;
 
 const Game: React.FC = () => {
+  const { cols, rows, time, countMines } = useAppSelector(
+    (state) => state.game
+  );
+
   const {
     board,
     gameOver,
-    setGameOver,
-    setFlags,
     flags,
     timer,
-    setVictory,
     victory,
-    setIsRunning,
     startGame,
-    setBoard,
-    checkVictory,
+    handleCellClick,
+    handleRightClick,
+    handleMiddleMouseDown,
+    openAllUnflaggedCells,
+    handleMiddleMouseUp,
     isRunning,
-  } = useGame(NUM_ROWS, NUM_COLS, NUM_MINES);
-  console.log(setVictory);
-
-  const router = useRouter();
+  } = useGame(rows, cols, countMines, time);
+  const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
 
-  console.log(flags, NUM_MINES, victory);
   useEffect(() => {
+    const level = localStorage.getItem("levelGame");
+
+    if (level) {
+      dispatch(setSettings(JSON.parse(level)));
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (gameOver) {
+      setOpen(true);
+    }
     if (victory) {
       setOpen(true);
     }
-  }, [victory]);
-  const handleCellClick = (row: number, col: number) => {
-    if (gameOver) return;
-    if (victory) {
-      return;
-    }
-    const newBoard = [...board];
-    const cell = newBoard[row][col];
-
-    if (cell.isRevealed || cell.isFlagged) {
-      return;
-    }
-
-    cell.isRevealed = true;
-
-    if (cell.hasMine) {
-      setGameOver(true);
-      setOpen(true);
-      setIsRunning(false);
-    } else {
-      // Если ячейка не имеет соседних мин, открываем соседние ячейки
-      if (cell.neighboringMines === 0) {
-        openAdjacentCells(newBoard, row, col);
-      }
-    }
-
-    setBoard(newBoard);
-  };
-
-  const openAdjacentCells = (board: CellType[][], row: number, col: number) => {
-    for (let i = -1; i <= 1; i++) {
-      for (let j = -1; j <= 1; j++) {
-        const newRow = row + i;
-        const newCol = col + j;
-        if (
-          newRow >= 0 &&
-          newRow < NUM_ROWS &&
-          newCol >= 0 &&
-          newCol < NUM_COLS &&
-          !(i === 0 && j === 0)
-        ) {
-          const adjacentCell = board[newRow][newCol];
-          if (!adjacentCell.isRevealed && !adjacentCell.isFlagged) {
-            adjacentCell.isRevealed = true;
-            if (adjacentCell.neighboringMines === 0) {
-              openAdjacentCells(board, newRow, newCol);
-            }
-          }
-        }
-      }
-    }
-  };
-
-  const handleRightClick = (e: React.MouseEvent, row: number, col: number) => {
-    e.preventDefault();
-    if (gameOver) return;
-
-    const newBoard = [...board];
-    const cell = newBoard[row][col];
-
-    if (!cell.isRevealed) {
-      cell.isFlagged = !cell.isFlagged; // Переключаем состояние флага
-      if (cell.isFlagged) {
-        setFlags((prevCount) => prevCount + 1); // Увеличиваем количество флажков
-      } else {
-        setFlags((prevCount) => prevCount - 1); // Уменьшаем количество флажков
-      }
-      console.log(checkVictory(newBoard));
-      console.log(flags, NUM_MINES);
-
-      setBoard(newBoard);
-    }
-  };
+  }, [victory, gameOver]);
 
   return (
     <>
       <Container className={styles.screen}>
-        <button
-          className={styles.fixedBtn}
-          onClick={() => {
-            router.push("/settings");
-          }}
-        >
-          <ArrowBackIosNewIcon />
-        </button>
+        <BackButton href="/settings" />
         <HeaderGame
           isRunning={isRunning || gameOver}
           startGame={startGame}
           timer={timer}
           key={"HeaderGame"}
+          mineCount={countMines}
+          flags={flags}
         />
-        {isRunning && (
-          <span>
-            Разность между количеством мин и флажков - {NUM_MINES - flags}
-          </span>
-        )}
 
         <Board
+          size={cols}
           board={board}
-          colsNum={NUM_COLS}
+          colsNum={cols}
           handleCellClick={handleCellClick}
           handleRightClick={handleRightClick}
+          handleMiddleMouseDown={handleMiddleMouseDown}
+          handleMiddleMouseUp={handleMiddleMouseUp}
         />
         <MyModal
           victory={victory}

@@ -1,5 +1,5 @@
 "use client";
-import Setting from "@/components/Setting";
+import { Setting } from "@/components/shared";
 import { Container } from "@mui/material";
 import React from "react";
 import styles from "../styles/Settings.module.scss";
