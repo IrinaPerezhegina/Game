@@ -6,7 +6,6 @@ import { useEffect } from "react";
 
 const Home = () => {
   const router = useRouter();
-
   const dispatch = useAppDispatch();
 
   useEffect(() => {

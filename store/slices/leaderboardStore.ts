@@ -1,5 +1,6 @@
 import { Player } from "@/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 const BestPlayer = [
   {
     id: 1,

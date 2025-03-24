@@ -41,6 +41,7 @@ export const Cell: React.FC<CellProps> = ({
   onClick,
   onRightClick,
 }) => {
+  
   const getCellContent = () => {
     if (cell.isRevealed) {
       if (cell.hasMine) {

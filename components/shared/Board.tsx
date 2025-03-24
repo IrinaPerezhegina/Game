@@ -24,14 +24,11 @@ export const Board: React.FC<BoardProps> = ({
   handleCellClick,
   handleRightClick,
 }) => {
-  console.log(size);
-
   return (
     <div
       className={`${styles.board} ${styles[SizeGridTemplateColumns[size]]}`}
       style={{
         display: "grid",
-        // gridTemplateColumns: `repeat(${colsNum}, ${SizeGridTemplateColumns[size]})`,
       }}
     >
       {board.map((row, rowIndex) =>

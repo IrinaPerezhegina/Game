@@ -13,7 +13,6 @@ const Game: React.FC = () => {
   const { cols, rows, time, countMines } = useAppSelector(
     (state) => state.game
   );
-
   const {
     board,
     gameOver,
