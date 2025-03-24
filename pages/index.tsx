@@ -1,8 +1,17 @@
+import { useAppDispatch } from "@/hooks/hooks";
+import { initBestPlayers } from "@/store/slices/leaderboardStore";
 import { Container } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const Home = () => {
   const router = useRouter();
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(initBestPlayers());
+  }, [dispatch]);
 
   return (
     <Container className="screen">
