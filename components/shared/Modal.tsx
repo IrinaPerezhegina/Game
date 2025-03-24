@@ -13,6 +13,7 @@ interface ModalProps {
   victory: boolean;
   gameOver: boolean;
 }
+
 const styleGameower = {
   position: "absolute",
   top: "50%",
@@ -26,6 +27,7 @@ const styleGameower = {
   px: 4,
   pb: 3,
 };
+
 const styleWinner = {
   position: "absolute",
   top: "50%",
@@ -39,6 +41,7 @@ const styleWinner = {
   px: 4,
   pb: 3,
 };
+
 export const MyModal: React.FC<ModalProps> = ({
   gameOver,
   open,

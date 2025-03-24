@@ -8,9 +8,11 @@ interface CellProps {
   onClick: () => void;
   onRightClick: (e: React.MouseEvent) => void;
 }
+
 type ColorCellType = {
   [key: number]: string;
 };
+
 const ColorCell: ColorCellType = {
   0: "#9ba0a9",
   1: "#0810ae",
@@ -22,14 +24,17 @@ const ColorCell: ColorCellType = {
   7: "#00020f",
   8: "#ffffff",
 };
+
 type SizeCellType = {
   [key: number]: string;
 };
+
 const SizeCell: SizeCellType = {
   8: "easy",
   16: "medium",
   32: "hard",
 };
+
 export const Cell: React.FC<CellProps> = ({
   size,
   cell,

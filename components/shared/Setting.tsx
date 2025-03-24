@@ -27,16 +27,17 @@ const Settings = {
 
 export const Setting = () => {
   const router = useRouter();
-  const [gameSelected, setGameSelected] = useState<"easy" | "medium" | "hard">(
-    "easy"
-  );
+  const [gameSelected, setGameSelected] = useState<
+    "easy" | "medium" | "hard" | ""
+  >();
   const dispatch = useAppDispatch();
-  console.log(Settings[gameSelected]);
 
   useEffect(() => {
-    dispatch(setSettings(Settings[gameSelected]));
+    if (gameSelected) {
+      dispatch(setSettings(Settings[gameSelected]));
+    }
   }, [gameSelected, dispatch]);
-  // const count = useAppSelector((state) => state.counter.name);
+
   return (
     <>
       <Container className={styles.screen}>
