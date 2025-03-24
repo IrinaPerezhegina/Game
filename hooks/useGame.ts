@@ -1,4 +1,3 @@
-// hooks/useGame.ts
 import { getTimeGame } from "@/store/slices/leaderboardStore";
 import { useEffect, useState } from "react";
 import { Cell as CellType } from "../types/index";
@@ -16,8 +15,6 @@ const useGame = (
   const [timer, setTimer] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [victory, setVictory] = useState(false);
-  const [middleMouseDown, setMiddleMouseDown] = useState(false);
-  const [middleMouseDownTime, setMiddleMouseDownTime] = useState(0);
   const dispatch = useAppDispatch();
 
   const startGame = () => {
@@ -69,17 +66,7 @@ const useGame = (
     if (victory) {
       return;
     }
-    // console.log(board);
 
-    // const allMinesOpen = board.flat().filter((cell) => !cell.isRevealed);
-
-    // console.log(allMinesOpen);
-    // if (allMinesOpen) {
-    //   setVictory(true);
-    //   dispatch(getTimeGame(timer));
-    //   setIsRunning(false);
-    //   setTimer(0);
-    // }
     const newBoard = [...board];
     const cell = newBoard[row][col];
 
@@ -163,43 +150,6 @@ const useGame = (
     }
   };
 
-  const handleMiddleMouseDown = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setMiddleMouseDown(true);
-    setMiddleMouseDownTime(Date.now());
-  };
-
-  const handleMiddleMouseUp = (
-    e: React.MouseEvent,
-    row: number,
-    col: number
-  ) => {
-    e.preventDefault();
-    setMiddleMouseDown(false);
-    const elapsedTime = Date.now() - middleMouseDownTime;
-
-    if (elapsedTime < 1000) {
-      const cell = board[row][col];
-      if (cell.isRevealed && cell.neighboringMines === flags) {
-        openAllUnflaggedCells(board);
-      }
-    }
-  };
-
-  const openAllUnflaggedCells = (board: CellType[][]) => {
-    for (let i = 0; i < rows; i++) {
-      for (let j = 0; j < cols; j++) {
-        const cell = board[i][j];
-        if (!cell.isFlagged && !cell.isRevealed && cell.neighboringMines > 0) {
-          cell.isRevealed = true;
-          if (cell.neighboringMines === 0) {
-            openAdjacentCells(board, i, j);
-          }
-        }
-      }
-    }
-    setBoard([...board]);
-  };
   return {
     board,
     gameOver,
@@ -209,9 +159,6 @@ const useGame = (
     startGame,
     handleCellClick,
     handleRightClick,
-    handleMiddleMouseDown,
-    openAllUnflaggedCells,
-    handleMiddleMouseUp,
     isRunning,
   };
 };

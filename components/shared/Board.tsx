@@ -9,12 +9,6 @@ interface BoardProps {
   colsNum: number;
   handleCellClick: (row: number, col: number) => void;
   handleRightClick: (e: React.MouseEvent, row: number, col: number) => void;
-  handleMiddleMouseDown: (
-    e: React.MouseEvent,
-    row: number,
-    col: number
-  ) => void;
-  handleMiddleMouseUp: (e: React.MouseEvent, row: number, col: number) => void;
 }
 type SizBoardType = {
   [key: number]: string;
@@ -29,8 +23,6 @@ export const Board: React.FC<BoardProps> = ({
   size,
   handleCellClick,
   handleRightClick,
-  handleMiddleMouseDown,
-  handleMiddleMouseUp,
 }) => {
   console.log(size);
 
@@ -50,10 +42,6 @@ export const Board: React.FC<BoardProps> = ({
             cell={cell}
             onClick={() => handleCellClick(rowIndex, colIndex)}
             onRightClick={(e) => handleRightClick(e, rowIndex, colIndex)}
-            onMiddleMouseDown={(e) =>
-              handleMiddleMouseDown(e, rowIndex, colIndex)
-            }
-            onMiddleMouseUp={(e) => handleMiddleMouseUp(e, rowIndex, colIndex)}
           />
         ))
       )}

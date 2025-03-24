@@ -23,9 +23,6 @@ const Game: React.FC = () => {
     startGame,
     handleCellClick,
     handleRightClick,
-    handleMiddleMouseDown,
-    openAllUnflaggedCells,
-    handleMiddleMouseUp,
     isRunning,
   } = useGame(rows, cols, countMines, time);
   const dispatch = useAppDispatch();
@@ -67,8 +64,6 @@ const Game: React.FC = () => {
           colsNum={cols}
           handleCellClick={handleCellClick}
           handleRightClick={handleRightClick}
-          handleMiddleMouseDown={handleMiddleMouseDown}
-          handleMiddleMouseUp={handleMiddleMouseUp}
         />
         <MyModal
           victory={victory}

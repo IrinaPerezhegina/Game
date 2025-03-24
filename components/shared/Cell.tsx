@@ -7,8 +7,6 @@ interface CellProps {
   size: number;
   onClick: () => void;
   onRightClick: (e: React.MouseEvent) => void;
-  onMiddleMouseDown: (e: React.MouseEvent) => void;
-  onMiddleMouseUp: (e: React.MouseEvent) => void;
 }
 type ColorCellType = {
   [key: number]: string;
@@ -37,8 +35,6 @@ export const Cell: React.FC<CellProps> = ({
   cell,
   onClick,
   onRightClick,
-  onMiddleMouseDown,
-  onMiddleMouseUp,
 }) => {
   const getCellContent = () => {
     if (cell.isRevealed) {
@@ -69,8 +65,6 @@ export const Cell: React.FC<CellProps> = ({
       }}
       onClick={onClick}
       onContextMenu={onRightClick} // Обрабатываем правый клик
-      onMouseDown={onMiddleMouseDown}
-      onMouseUp={onMiddleMouseUp}
     >
       {getCellContent()}
     </div>
